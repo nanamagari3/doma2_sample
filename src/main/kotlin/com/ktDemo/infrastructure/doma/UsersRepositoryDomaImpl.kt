@@ -6,6 +6,10 @@ import com.ktDemo.infrastructure.doma.dao.UsersEntityDao
 import com.ktDemo.infrastructure.doma.entity.UsersEntity
 import org.springframework.stereotype.Repository
 
+/**
+ * Repository実装クラス
+ * Dao(Java) - Repository(Kotlin)間のブリッジ
+ */
 @Repository
 class UsersRepositoryDomaImpl(
         private val usersDomaDao: UsersEntityDao

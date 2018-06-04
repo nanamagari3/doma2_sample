@@ -8,12 +8,15 @@ import java.util.List;
 
 
 /**
+ * Users Dao
+ * (自動生成)
  */
 @ConfigAutowireable
 @Dao
 public interface UsersEntityDao {
 
     /**
+     * IDで検索
      * @param id
      * @return the UsersEntity entity
      */
@@ -21,12 +24,14 @@ public interface UsersEntityDao {
     UsersEntity selectById(Integer id);
 
     /**
+     * 全レコード取得
      * @return the UsersEntity entity list
      */
     @Select
     List<UsersEntity> selectAll();
 
     /**
+     * 追加
      * @param entity
      * @return affected rows
      */
@@ -34,6 +39,7 @@ public interface UsersEntityDao {
     int insert(UsersEntity entity);
 
     /**
+     * 更新
      * @param entity
      * @return affected rows
      */
@@ -41,6 +47,7 @@ public interface UsersEntityDao {
     int update(UsersEntity entity);
 
     /**
+     * 削除
      * @param entity
      * @return affected rows
      */
