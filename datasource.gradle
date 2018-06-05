@@ -1,0 +1,22 @@
+import org.yaml.snakeyaml.*
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.yaml:snakeyaml:1.19")
+    }
+}
+
+task datasource {
+    Yaml parser = new Yaml()
+    ant.loadfile (
+            srcfile: 'src/main/resources/application.yml',
+            property: 'yaml'
+    )
+    def yamlObj = parser.load("${ant.properties.yaml}")
+    ext.url = yamlObj.doma.dbUrl
+    ext.user = yamlObj.doma.dbUser
+    ext.password = yamlObj.doma.dbPassword
+}

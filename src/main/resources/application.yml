@@ -1,2 +1,5 @@
 doma:
   dialect: mysql
+  dbUser: "root"
+  dbPassword: "qwerty"
+  dbUrl: "jdbc:mysql://localhost:3306/Spring_Training"

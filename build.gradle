@@ -14,6 +14,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("org.yaml:snakeyaml:1.19")
     }
 }
 
@@ -86,13 +87,10 @@ dependencies {
 // DBのスキーマからDomaのEntity, Dao, SQLファイルを自動生成するタスク
 // see: http://doma-gen.readthedocs.io/ja/stable/gen/
 //
+apply from: 'datasource.gradle'
+
 task domagen {
     doLast {
-        def dbHost = "localhost"
-        def dbName = "Spring_Training"
-        def dbUser = "root"
-        def dbPassword = "qwerty"
-        def dbUrl = "jdbc:mysql://${dbHost}/${dbName}"
 
         ant.taskdef(resource: 'domagentask.properties',
                 classpath: configurations.domaGenRuntime.asPath)
@@ -100,9 +98,9 @@ task domagen {
         def packageName = "com.ktDemo.infrastructure.doma"
 
         ant.gen(
-                url: dbUrl,
-                user: dbUser,
-                password: dbPassword,
+                url: "${datasource.url}",
+                user: "${datasource.user}",
+                password: "${datasource.password}",
                 templatePrimaryDir: 'src/main/resources/doma-gen-custom-templates'
         ) {
             entityConfig(
