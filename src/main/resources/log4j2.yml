@@ -1,0 +1,19 @@
+# プロファイルによる切り替え方法
+# logging.config=classpath:log4j2-prod.yml
+# 設定ファイル: http://www.techscore.com/tech/Java/ApacheJakarta/Log4J/index/
+
+Configuration:
+  status: info
+
+  Appenders:
+    Console:
+      name: console
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%d{yyyy/MM/dd HH:mm:ss.SSS} %-5level [%-25t] [%F(%M:%L)] %logger{36} - %msg%n"
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: console

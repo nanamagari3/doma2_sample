@@ -1,5 +1,12 @@
-doma:
-  dialect: mysql
-  dbUser: "root"
-  dbPassword: "qwerty"
-  dbUrl: "jdbc:mysql://localhost:3306/Spring_Training"
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Spring_Training
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: qwerty
+    # ConnectionPool にHikariCPを使用
+    # 参照: https://github.com/brettwooldridge/HikariCP
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: 100
+      idleTimeout: 60000

@@ -16,7 +16,7 @@ task datasource {
             property: 'yaml'
     )
     def yamlObj = parser.load("${ant.properties.yaml}")
-    ext.url = yamlObj.doma.dbUrl
-    ext.user = yamlObj.doma.dbUser
-    ext.password = yamlObj.doma.dbPassword
+    ext.url = yamlObj.spring.datasource.url
+    ext.user = yamlObj.spring.datasource.username
+    ext.password = yamlObj.spring.datasource.password
 }
