@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository
  */
 @Repository
 class UsersRepositoryDomaImpl(
-        private val usersDomaDao: UsersEntityDao
+        private val usersEntityDao: UsersEntityDao
 ) : UsersRepository {
     override fun findAll(): List<Users> {
-        return usersDomaDao.selectAll().map { _MapToModel(it) }
+        return usersEntityDao.selectAll().map { _MapToModel(it) }
     }
 
     private fun _MapToModel(entity: UsersEntity): Users {
@@ -27,7 +27,7 @@ class UsersRepositoryDomaImpl(
     }
 
     override fun findById(id: Int): Users {
-        val entity = usersDomaDao.selectById(id)
+        val entity = usersEntityDao.selectById(id)
 
         return if (entity == null) {
             Users(id = null,
@@ -48,7 +48,7 @@ class UsersRepositoryDomaImpl(
         insertEntity.firstName = users.firstName
         insertEntity.lastName = users.lastName
 
-        return usersDomaDao.insert(insertEntity)
+        return usersEntityDao.insert(insertEntity)
     }
 
     override fun update(users: Users): Int {
@@ -57,16 +57,16 @@ class UsersRepositoryDomaImpl(
         insertEntity.firstName = users.firstName
         insertEntity.lastName = users.lastName
 
-        return usersDomaDao.update(insertEntity)
+        return usersEntityDao.update(insertEntity)
     }
 
     override fun delete(id: Int): Int {
-        val entity = usersDomaDao.selectById(id)
+        val entity = usersEntityDao.selectById(id)
 
         return if (entity == null) {
             -1
         } else {
-            usersDomaDao.delete(entity)
+            usersEntityDao.delete(entity)
         }
     }
 }
