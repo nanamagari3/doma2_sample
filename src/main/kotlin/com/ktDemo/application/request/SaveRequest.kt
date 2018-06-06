@@ -1,9 +1,9 @@
 package com.ktDemo.application.request
 
 /**
- * リクエストパラメータ データモデル
+ * リクエストパラメータ(Insert/Update)
  */
-data class requestForm(
+data class SaveRequest(
         val id: Int,
         val firstName: String,
         val lastName: String? = null

@@ -1,6 +1,6 @@
 package com.ktDemo.application.controller
 
-import com.ktDemo.application.request.requestForm
+import com.ktDemo.application.request.SaveRequest
 import com.ktDemo.domain.model.Users
 import com.ktDemo.domain.repository.UsersRepository
 import org.springframework.web.bind.annotation.*
@@ -23,7 +23,7 @@ class UserController(
     }
 
     @RequestMapping("/regist")
-    fun regist(@RequestBody request: requestForm): String {
+    fun regist(@RequestBody request: SaveRequest): String {
         val registResult = usersRepository.regist(Users(id = request.id, firstName = request.firstName, lastName = request.lastName))
         return if (registResult > 0) {
             "OK"
@@ -33,7 +33,7 @@ class UserController(
     }
 
     @RequestMapping("/update")
-    fun update(@RequestBody request: requestForm): String {
+    fun update(@RequestBody request: SaveRequest): String {
         val registResult = usersRepository.update(Users(id = request.id, firstName = request.firstName, lastName = request.lastName))
         return if (registResult > 0) {
             "OK"
