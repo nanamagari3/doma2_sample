@@ -29,11 +29,8 @@ public class AppConfig implements Config {
         final String DB_USER = (String) configMap.get("username");
         final String DB_PASS = (String) configMap.get("password");
 
-//        DBConfig configMap = yaml.load(ClassLoader.getSystemResourceAsStream("application.yml"));
-
         dialect = new MysqlDialect();
         dataSource = new LocalTransactionDataSource(DB_URL, DB_USER, DB_PASS);
-        //dataSource = new LocalTransactionDataSource("jdbc:mysql://localhost:3306/Spring_Training", "root", "qwerty");
         transactionManager = new LocalTransactionManager(dataSource.getLocalTransaction(getJdbcLogger()));
     }
 
