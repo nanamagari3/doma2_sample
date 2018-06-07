@@ -10,3 +10,10 @@ spring:
     hikari:
       maximumPoolSize: 100
       idleTimeout: 60000
+    # JPA (JpaBaseConfiguration, HibernateJpaAutoConfiguration)
+    jpa:
+      show-sql: false
+      database-platform: org.hibernate.dialect.MySQLDialect
+      database: MYSQL
+    # validate | update | create | create-drop
+      ddl-auto: update

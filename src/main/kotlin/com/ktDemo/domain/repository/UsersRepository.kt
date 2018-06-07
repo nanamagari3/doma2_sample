@@ -1,14 +1,9 @@
 package com.ktDemo.domain.repository
 
-import com.ktDemo.domain.model.Users
+import com.ktDemo.infrastructure.hibernate.entity.UsersEntity
+import org.springframework.data.jpa.repository.JpaRepository
 
 /**
  * Repository
  */
-interface UsersRepository {
-    fun findAll(): List<Users>
-    fun findById(id: Int): Users
-    fun regist(users: Users): Int
-    fun update(users: Users): Int
-    fun delete(id: Int): Int
-}
+interface UsersRepository : JpaRepository<UsersEntity, Long>

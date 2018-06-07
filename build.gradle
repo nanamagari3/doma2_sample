@@ -62,6 +62,7 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-jersey")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml')
 
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
@@ -76,52 +77,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
 
     // -------------------------------------------
-    // Doma2
+    // Hibernate
     // -------------------------------------------
-    compile "org.seasar.doma.boot:doma-spring-boot-starter:${springBootDomaVersion}"
-    compile "org.seasar.doma:doma:${domaVersion}"
-
-    // -------------------------------------------
-    // Doma2 gen
-    // -------------------------------------------
-    domaGenRuntime("org.seasar.doma:doma-gen:${domaGenVersion}")
-    domaGenRuntime('mysql:mysql-connector-java')
-
-}
-
-//
-// Doma-Gen
-// DBのスキーマからDomaのEntity, Dao, SQLファイルを自動生成するタスク
-// see: http://doma-gen.readthedocs.io/ja/stable/gen/
-//
-apply from: 'datasource.gradle'
-
-task domagen {
-    doLast {
-
-        ant.taskdef(resource: 'domagentask.properties',
-                classpath: configurations.domaGenRuntime.asPath)
-
-        def packageName = "com.ktDemo.infrastructure.doma"
-
-        ant.gen(
-                url: "${datasource.url}",
-                user: "${datasource.user}",
-                password: "${datasource.password}",
-                templatePrimaryDir: 'src/main/resources/doma-gen-custom-templates'
-        ) {
-            entityConfig(
-                    packageName: "${packageName}.entity",
-                    entitySuffix: "Entity",
-                    overwrite: true,
-                    namingType: "snake_lower_case",
-                    useAccessor: false,
-                    useListener: false,
-                    showColumnName: false,
-                    showDbComment: true
-            )
-            daoConfig(packageName: "${packageName}.dao")
-            sqlConfig()
-        }
-    }
+    compile "org.hibernate:hibernate-core:5.3.1.Final"
 }
