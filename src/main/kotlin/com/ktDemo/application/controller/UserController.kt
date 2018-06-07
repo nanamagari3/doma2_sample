@@ -23,28 +23,18 @@ class UserController(
     }
 
     @RequestMapping("/regist")
-    fun regist(@RequestBody request: SaveRequest): String {
-        val registResult = usersService.regist(Users(id = request.id, firstName = request.firstName, lastName = request.lastName))
-        return if (registResult > 0) {
-            "OK"
-        } else {
-            "NG"
-        }
+    fun regist(@RequestBody request: SaveRequest): Users {
+        return usersService.regist(Users(id = request.id, firstName = request.firstName, lastName = request.lastName))
     }
 
     @RequestMapping("/update")
-    fun update(@RequestBody request: SaveRequest): Users {
-        val registResult = usersService.update(Users(id = request.id, firstName = request.firstName, lastName = request.lastName))
-        return registResult
+    fun update(@RequestBody request: SaveRequest): Int {
+        return usersService.update(Users(id = request.id, firstName = request.firstName, lastName = request.lastName))
+
     }
 
     @RequestMapping("/delete")
-    fun delete(@RequestParam("id") id: Int): String {
-        return if (usersService.delete(id) > 0) {
-            "OK"
-        } else {
-            "NG"
-        }
+    fun delete(@RequestParam("id") id: Int): Int {
+        return usersService.delete(id)
     }
-
 }

@@ -45,15 +45,14 @@ class UsersRepositoryDomaImpl(
         }
     }
 
-    override fun regist(users: Users): Int {
-
-        return repo.findById(users.id!!.toLong()).map { ResponseEntity.ok().body(repo.save(it)) }.orElse(ResponseEntity.notFound().build()).statusCodeValue
+    override fun regist(users: Users): Users {
+        val result = repo.save(UsersEntity(id = users.id!!.toLong(), firstName = users.firstName!!, lastName = users.lastName))
+        return Users(id = result.id.toInt(), firstName = result.firstName, lastName = result.lastName)
     }
 
-    override fun update(users: Users): Users {
-        val result = repo.save(UsersEntity(id = users.id!!.toLong(), firstName = users.firstName!!, lastName = users.lastName))
+    override fun update(users: Users): Int {
 
-        return Users(id = result.id.toInt(), firstName = result.firstName, lastName = result.lastName)
+        return repo.findById(users.id!!.toLong()).map { ResponseEntity.ok().body(repo.save(it)) }.orElse(ResponseEntity.notFound().build()).statusCodeValue
     }
 
     override fun delete(id: Int): Int {
