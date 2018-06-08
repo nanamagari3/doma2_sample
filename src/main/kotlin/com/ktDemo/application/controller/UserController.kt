@@ -3,6 +3,7 @@ package com.ktDemo.application.controller
 import com.ktDemo.application.request.SaveRequest
 import com.ktDemo.domain.model.Users
 import com.ktDemo.domain.service.UsersService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -18,8 +19,8 @@ class UserController(
     }
 
     @RequestMapping("/find")
-    fun find(@RequestParam("id") id: Int): Users {
-        return usersService.findById(id)
+    fun find(@RequestParam("id") id: Int): ResponseEntity<Users> {
+        return ResponseEntity.ok(usersService.findById(id))
     }
 
     @RequestMapping("/regist")

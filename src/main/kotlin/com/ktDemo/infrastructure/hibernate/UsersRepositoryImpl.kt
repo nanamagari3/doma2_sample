@@ -35,15 +35,18 @@ class UsersRepositoryDomaImpl(
         return if (entity == null) {
             Users(id = null,
                     firstName = null,
-                    lastName = null)
+                    lastName = null,
+                    details = null)
         } else {
             Users(
                     id = entity.id.toInt(),
                     firstName = entity.firstName,
-                    lastName = entity.lastName
+                    lastName = entity.lastName,
+                    details = entity.detail
             )
         }
     }
+
 
     override fun regist(users: Users): Users {
         val result = repo.save(UsersEntity(id = users.id!!.toLong(), firstName = users.firstName!!, lastName = users.lastName))

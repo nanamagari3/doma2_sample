@@ -1,10 +1,7 @@
 package com.ktDemo.infrastructure.hibernate.entity
 
 import java.io.Serializable
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 
 /**
@@ -25,5 +22,9 @@ data class UsersEntity(
 
         /** 名  */
         @Column(name = "last_name", nullable = true)
-        var lastName: String? = null
+        var lastName: String? = null,
+
+        @OneToOne(cascade = arrayOf(CascadeType.ALL))
+        val detail: DetailsEntity? = null
+
 ) : Serializable
